@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApiDbContext>(
-    opt => opt.UseSqlite("Data Source=api.db")
+    opt => opt.UseSqlite("Data Source=api.db") // hard-coded
 );
 
 var app = builder.Build();

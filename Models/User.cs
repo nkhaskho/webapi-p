@@ -1,3 +1,5 @@
+//using Microsoft Identity Platform
+
 namespace WebApiP.Models;
 
 public class User
@@ -11,6 +13,8 @@ public class User
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public UserRole Role { get; set; } = UserRole.USER;
+
+    public int ProjectId { get; set; }
     
 }
 
