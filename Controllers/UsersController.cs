@@ -17,15 +17,13 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    //[Route("search")]
-    public IActionResult Search([FromQuery] string q, [FromQuery] string role)
+    //[Route("search")] FromQuery] string? q, 
+    public IActionResult Search([FromQuery] string? q)
     {
-        var result = _context.Users.Where(
-            u => u.Role.Equals(role) 
-            & u.Username!.Contains(q)
+        if (q == null) return Ok(_context.Users.ToList());
+        return Ok(_context.Users.Where(
+            u => u.Username.Contains(q)).ToList()
         );
-        return Ok(result);
-        // dotnet run --args
     }
 
     [HttpPost]
