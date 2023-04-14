@@ -17,7 +17,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    //[Route("/")]
+    //[Route("search")]
     public IActionResult Search([FromQuery] string q, [FromQuery] string role)
     {
         var result = _context.Users.Where(
@@ -25,10 +25,11 @@ public class UsersController : ControllerBase
             & u.Username!.Contains(q)
         );
         return Ok(result);
+        // dotnet run --args
     }
 
     [HttpPost]
-    public IActionResult Add(User user)
+    public IActionResult Add([FromBody] User user)
     {
         // logic; validation + save
         Console.WriteLine(user.Role);
@@ -44,6 +45,15 @@ public class UsersController : ControllerBase
     {
         var user = _context.Users.Find(id);
         if (user == null) return NotFound();
+        return Ok(user);
+    }
+
+    [HttpPut]
+    public IActionResult Update(User user)
+    {
+        // if (ModelState.IsValid) { /* update */ }
+        _context.Users.Update(user);
+        _context.SaveChanges();
         return Ok(user);
     }
 

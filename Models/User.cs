@@ -8,17 +8,19 @@ public class User
 
     public string? Email { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.Now.ToUniversalTime();
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-    public string Role { get; set; } = AppUserRole.USER;
+    public UserRole Role { get; set; } = UserRole.USER;
     
 }
 
 public enum UserRole
 {
+    // 2, 1, 0
     SUPERADMIN, ADMIN, USER
 }
 
+// Another way of thinking
 public class AppUserRole
 {
     public static readonly string SUPERADMIN = "SUPERADMIN";
