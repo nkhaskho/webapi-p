@@ -1,13 +1,18 @@
 //using Microsoft Identity Platform
 
+using System.ComponentModel.DataAnnotations;
+
 namespace WebApiP.Models;
 
 public class User
 {
-
+    [Key] // Not needed
     public int Id { get; set; }
-    public string? Username { get; set; }
 
+    [Required]
+    public string Username { get; set; }
+
+    [EmailAddress]
     public string? Email { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;

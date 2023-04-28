@@ -16,9 +16,10 @@ public class UsersController : ControllerBase
         _context = ctx;
     }
 
+
     [HttpGet]
     //[Route("search")] FromQuery] string? q, 
-    public IActionResult Search([FromQuery] string? q)
+    public IActionResult Search(string? q)
     {
         if (q == null) return Ok(_context.Users.ToList());
         return Ok(_context.Users.Where(
@@ -27,9 +28,10 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Add([FromBody] User user)
+    public IActionResult Add(User user)
     {
         // logic; validation + save
+        if (!ModelState.IsValid) return BadRequest(ModelState.AsEnumerable());
         Console.WriteLine(user.Role);
         //user.CreatedAt = DateTime.Now()
         _context.Users.Add(user);
@@ -63,7 +65,7 @@ public class UsersController : ControllerBase
         if (user == null) return NotFound();
         _context.Users.Remove(user);
         _context.SaveChanges();
-        return Ok(user);
+        return NoContent();
     }
     
 }
